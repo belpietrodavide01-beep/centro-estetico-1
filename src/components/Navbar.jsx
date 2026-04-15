@@ -45,7 +45,7 @@ export default function Navbar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || menuOpen ? 'bg-[#faf9f6]/95 backdrop-blur-md border-b border-stone-200/50 py-1' : 'bg-transparent py-4'}`}
+        className={`${isMobile ? 'sticky top-0 left-0' : 'relative'} w-full z-50 transition-all duration-300 ${isMobile && (isScrolled || menuOpen) ? 'bg-[#faf9f6]/95 backdrop-blur-md border-b border-stone-200/50 py-1' : 'bg-transparent py-4'}`}
       >
         <nav className="w-full px-4 md:px-6 lg:px-16 h-20 flex items-center justify-between md:grid md:grid-cols-3">
 

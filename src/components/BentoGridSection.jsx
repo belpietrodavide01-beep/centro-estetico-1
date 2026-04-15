@@ -191,12 +191,12 @@ export default function BentoGridSection() {
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className={`w-full rounded-[2.5rem] bg-[#fdfcfb] border border-stone-200/50 p-6 md:p-8 relative overflow-hidden shadow-sm flex flex-col justify-between ${isMobile ? 'h-[320px]' : 'h-[180px] md:h-[220px]'}`}
+              className={`w-full rounded-[2.5rem] bg-[#fdfcfb] border border-stone-200/50 p-7 md:p-8 relative overflow-hidden shadow-sm flex flex-col ${isMobile ? 'h-[320px]' : 'h-[180px] md:h-[220px]'}`}
             >
-              <h3 className="text-black text-2xl md:text-3xl lg:text-4xl font-serif leading-none z-10 max-w-[200px] mb-4" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+              <h3 className="text-black text-2xl md:text-3xl lg:text-4xl font-serif leading-tight z-10 max-w-[220px] mb-4" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                 Un'esperienza cliente impeccabile
               </h3>
-              <div className={`mt-auto ml-auto w-[85%] h-[60%] rounded-[1.8rem] overflow-hidden shadow-md transition-transform duration-700 ${isMobile ? 'scale-100' : 'hover:scale-105'}`}>
+              <div className={`absolute ${isMobile ? '-bottom-4 -right-4 w-64 h-64' : '-bottom-6 -right-6 w-52 h-48'} rounded-[2.2rem] overflow-hidden shadow-2xl border-[6px] border-white transition-transform duration-700 ${isMobile ? 'scale-100' : 'hover:scale-110 opacity-90'}`}>
                 <img 
                   src="/hero-2.png" 
                   alt="Trattamento" 
