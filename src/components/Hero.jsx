@@ -208,29 +208,11 @@ export default function Hero({ isMenuOpen }) {
             backgroundImage: "url('/hero-main.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            transform: 'translateZ(0)'
+            transform: 'translateZ(0)',
+            WebkitMaskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
+            maskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
           }}
         >
-          {/* Overlay che crea l'incavo (Notch) senza usare CSS mask-image (molto più performante) */}
-          <div 
-            className="absolute bottom-[-1px] left-1/2 -translate-x-1/2 z-40 pointer-events-none overflow-hidden"
-            style={{ width: notchW, height: notchW / 2 + 5 }}
-          >
-            <svg 
-              width={notchW} 
-              height={notchW / 2 + 5} 
-              viewBox={`0 0 ${notchW} ${notchW / 2 + 5}`}
-              fill="none" 
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-full h-full"
-            >
-              <path 
-                d={`M0 ${notchW / 2 + 5} V0 H${notchW} V${notchW / 2 + 5} Q${notchW} 5 ${notchW / 2} 5 Q0 5 0 ${notchW / 2 + 5}Z`} 
-                fill="#faf9f6" 
-              />
-            </svg>
-          </div>
-
           <img
             src="/hero-main.png"
             alt="Centro Estetico Premium"
