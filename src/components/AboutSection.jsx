@@ -35,7 +35,8 @@ export default function AboutSection() {
           >
             <div className="flex flex-col gap-1 text-white">
               <h4 className="text-2xl lg:text-3xl font-medium tracking-wide" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                Dr.ssa Anna Rossi
+                <span className="md:hidden">Anna Rossi</span>
+                <span className="hidden md:block">Dr.ssa Anna Rossi</span>
               </h4>
               <p className="text-white/80 text-sm font-medium tracking-wide">
                 Beauty Specialist & Skin Expert

@@ -31,7 +31,7 @@ export default function ContactSection() {
               letterSpacing: '-0.02em'
             }}
           >
-            Inizia il tuo <br /> percorso di bellezza
+            Inizia il tuo <br /> percorso con noi
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
@@ -85,8 +85,7 @@ export default function ContactSection() {
             {isInView ? (
               <iframe 
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d349.73423574216764!2d10.300684737959305!3d45.472344342001456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47819f2696f46c4f%3A0x37b1b02b1ef05e68!2sVia%20Dante%20Alighieri%2C%2027%2C%202027%2C%2025014%20Castenedolo%20BS!5e0!3m2!1sit!2sit!4v1776157559723!5m2!1sit!2sit"
-                className="absolute -top-1 -left-1 w-[110%] h-[115%] border-0"
-                style={{ transform: 'translate(14px, 12px)' }}
+                className="absolute inset-0 w-full h-full border-0"
                 allowFullScreen=""
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
