@@ -10,8 +10,7 @@ const navLinks = [
   { label: 'Contatti', href: '#contatti' },
 ]
 
-export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false)
+export default function Navbar({ menuOpen, setMenuOpen }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 
@@ -38,11 +37,6 @@ export default function Navbar() {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
-
-  // Dispatch event for performance synchronization (Hero pausing)
-  useEffect(() => {
-    window.dispatchEvent(new CustomEvent('navbar-menu-toggle', { detail: { open: menuOpen } }));
-  }, [menuOpen])
 
   return (
     <>
@@ -122,7 +116,7 @@ export default function Navbar() {
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.22 }}
             className="fixed top-20 left-0 right-0 z-40 border-b border-stone-100/80 shadow-sm md:hidden"
-            style={{ background: 'rgba(250, 249, 246, 0.98)', backdropFilter: 'blur(16px)' }}
+            style={{ background: 'rgba(250, 249, 246, 0.98)', backdropFilter: 'blur(10px)' }}
           >
             <ul className="flex flex-col px-6 py-4 gap-1">
               {navLinks.map((link, i) => (

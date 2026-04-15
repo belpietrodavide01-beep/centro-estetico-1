@@ -68,9 +68,9 @@ function ServicePill({ name, img, scale }) {
         gap: isMobileScale ? `${10 * scale}px` : `${12 * scale}px`,
         width: `${50 * scale}px`,
         height: isMobileScale ? `${210 * scale}px` : `${215 * scale}px`,
-        background: isMobileScale ? 'rgba(255, 253, 250, 0.95)' : 'rgba(255,255,255,0.3)',
-        backdropFilter: isMobileScale ? 'none' : 'none', // Disabled for performance
-        border: isMobileScale ? '1px solid rgba(166, 124, 82, 0.15)' : '0.8px solid rgba(255,255,255,0.5)',
+        background: isMobileScale ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255,255,255,0.3)',
+        backdropFilter: 'blur(8px)',
+        border: isMobileScale ? '1px solid rgba(255, 255, 255, 0.6)' : '0.8px solid rgba(255,255,255,0.5)',
         borderRadius: '999px',
         boxShadow: isMobileScale ? '0 4px 15px rgba(0,0,0,0.03)' : '0 10px 25px rgba(0,0,0,0.06)',
         position: 'relative',
@@ -136,15 +136,15 @@ function ServicePill({ name, img, scale }) {
   )
 }
 
-export default function Hero() {
+export default function Hero({ isMenuOpen }) {
   const sectionRef = useRef(null);
   const carouselRef = useRef(null);
   const isInView = useInView(sectionRef, { amount: 0.1 });
   const rotateTween = useRef(null);
   const { radius, notchW, isMobile, pillScale, titleScale } = useResponsive();
 
-  // Show fewer items on mobile to maintain spacing
-  const displayServices = isMobile ? SERVICES.slice(0, 14) : SERVICES;
+  // Optimized pill count for mobile performance
+  const displayServices = isMobile ? SERVICES.slice(0, 10) : SERVICES;
 
   useEffect(() => {
     rotateTween.current = gsap.to(carouselRef.current, {
@@ -162,24 +162,12 @@ export default function Hero() {
 
   useEffect(() => {
     if (rotateTween.current) {
-      if (isInView) rotateTween.current.play();
+      if (isInView && !isMenuOpen) rotateTween.current.play();
       else rotateTween.current.pause();
     }
-  }, [isInView]);
+  }, [isInView, isMenuOpen]);
 
-  // Pause when the mobile menu is open to free up resources for the menu's blur effect
-  useEffect(() => {
-    const handleMenuToggle = (e) => {
-      const isMenuOpen = e.detail.open;
-      if (rotateTween.current) {
-        if (isMenuOpen) rotateTween.current.pause();
-        else if (isInView) rotateTween.current.play();
-      }
-    };
 
-    window.addEventListener('navbar-menu-toggle', handleMenuToggle);
-    return () => window.removeEventListener('navbar-menu-toggle', handleMenuToggle);
-  }, [isInView]);
 
   return (
     <section
@@ -194,7 +182,7 @@ export default function Hero() {
         maxHeight: isMobile ? '650px' : '860px' 
       }}>
         
-        {/* OMBRA E FORMA DELLA HERO */}
+        {/* OMBRA E FORMA DELLA HERO (Semplificata, senza maschera pesantissima) */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
@@ -206,8 +194,6 @@ export default function Hero() {
             className="w-full h-full bg-stone-100"
             style={{
               borderRadius: isMobile ? '32px' : '44px',
-              WebkitMaskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
-              maskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
             }}
           />
         </div>
@@ -218,16 +204,33 @@ export default function Hero() {
           style={{
             zIndex: 10,
             borderRadius: isMobile ? '32px' : '44px',
-            WebkitMaskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
-            maskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
             backgroundColor: '#faf9f6',
             backgroundImage: "url('/hero-main.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            willChange: 'mask-image, -webkit-mask-image',
             transform: 'translateZ(0)'
           }}
         >
+          {/* Overlay che crea l'incavo (Notch) senza usare CSS mask-image (molto più performante) */}
+          <div 
+            className="absolute bottom-[-1px] left-1/2 -translate-x-1/2 z-40 pointer-events-none overflow-hidden"
+            style={{ width: notchW, height: notchW / 2 + 5 }}
+          >
+            <svg 
+              width={notchW} 
+              height={notchW / 2 + 5} 
+              viewBox={`0 0 ${notchW} ${notchW / 2 + 5}`}
+              fill="none" 
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-full"
+            >
+              <path 
+                d={`M0 ${notchW / 2 + 5} V0 H${notchW} V${notchW / 2 + 5} Q${notchW} 5 ${notchW / 2} 5 Q0 5 0 ${notchW / 2 + 5}Z`} 
+                fill="#faf9f6" 
+              />
+            </svg>
+          </div>
+
           <img
             src="/hero-main.png"
             alt="Centro Estetico Premium"

@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -24,6 +24,8 @@ gsap.config({
 })
 
 function App() {
+  const [menuOpen, setMenuOpen] = React.useState(false)
+
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.0, // Leggermente più veloce per reattività
@@ -60,9 +62,9 @@ function App() {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#faf9f6' }}>
-      <Navbar />
+      <Navbar menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
 
-      <Hero />
+      <Hero isMenuOpen={menuOpen} />
       <IntroductionSection />
 
       <TreatmentsSection />
