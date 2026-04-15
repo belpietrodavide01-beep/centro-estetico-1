@@ -58,7 +58,7 @@ export default function AboutSection() {
           >
             <span className="w-1.5 h-1.5 rounded-full bg-black" />
             <span className="text-[10px] md:text-xs font-bold tracking-[0.15em] text-black uppercase">
-              L'arte del benessere e della bellezza
+              L'arte del benessere
             </span>
           </motion.div>
 

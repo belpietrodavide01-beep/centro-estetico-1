@@ -39,7 +39,8 @@ export default function MedicalSection() {
               letterSpacing: '-0.02em'
             }}
           >
-            Trattamenti esclusivi per la tua bellezza quotidiana
+            <span className="md:hidden">Pura bellezza quotidiana</span>
+            <span className="hidden md:block">Trattamenti esclusivi per la tua bellezza quotidiana</span>
           </motion.h2>
 
           {/* Paragraph */}
