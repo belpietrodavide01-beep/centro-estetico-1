@@ -194,6 +194,8 @@ export default function Hero({ isMenuOpen }) {
             className="w-full h-full bg-stone-100"
             style={{
               borderRadius: isMobile ? '32px' : '44px',
+              WebkitMaskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
+              maskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
             }}
           />
         </div>
