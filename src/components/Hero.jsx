@@ -63,14 +63,15 @@ function ServicePill({ name, img, scale }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: `${12 * scale}px ${8 * scale}px ${18 * scale}px`,
-        gap: `${12 * scale}px`,
+        padding: `${10 * scale}px ${8 * scale}px ${16 * scale}px`,
+        gap: `${10 * scale}px`,
         width: `${50 * scale}px`,
-        height: `${215 * scale}px`,
-        background: 'rgba(255,255,255,0.3)',
-        border: '0.8px solid rgba(255,255,255,0.5)',
+        height: `${210 * scale}px`,
+        background: 'rgba(255, 255, 255, 0.4)',
+        backdropFilter: 'blur(8px)',
+        border: '1px solid rgba(255, 255, 255, 0.6)',
         borderRadius: '999px',
-        boxShadow: '0 10px 25px rgba(0,0,0,0.06)',
+        boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
         position: 'relative',
         overflow: 'hidden',
         willChange: 'transform',
@@ -80,15 +81,15 @@ function ServicePill({ name, img, scale }) {
     >
       <div
         style={{
-          width: `${36 * scale}px`,
-          height: `${36 * scale}px`,
+          width: `${34 * scale}px`,
+          height: `${34 * scale}px`,
           borderRadius: '50%',
           overflow: 'hidden',
-          border: '1.5px solid rgba(255,255,255,0.8)',
+          border: '1.5px solid rgba(255, 255, 255, 0.9)',
           flexShrink: 0,
-          backgroundColor: '#efe5d8', // Fallback background color
+          backgroundColor: '#f8f4f0',
           display: 'flex',
-          itemsCenter: 'center',
+          alignItems: 'center',
           justifyContent: 'center'
         }}
       >
@@ -102,7 +103,7 @@ function ServicePill({ name, img, scale }) {
           />
         ) : (
           <span style={{ 
-            fontSize: `${14 * scale}px`, 
+            fontSize: `${12 * scale}px`, 
             fontWeight: 700, 
             color: '#a67c52',
             fontFamily: 'Cormorant Garamond, serif'
@@ -113,11 +114,11 @@ function ServicePill({ name, img, scale }) {
       </div>
       <span
         style={{
-          color: 'rgba(74, 68, 63, 0.85)',
-          fontSize: `${8 * scale}px`,
+          color: 'rgba(60, 50, 40, 0.9)',
+          fontSize: `${7.5 * scale}px`,
           fontFamily: 'Inter, sans-serif',
-          fontWeight: 600,
-          letterSpacing: '0.1em',
+          fontWeight: 700,
+          letterSpacing: '0.12em',
           textTransform: 'uppercase',
           writingMode: 'vertical-rl',
           textOrientation: 'mixed',

@@ -26,13 +26,13 @@ html.lenis body {
 /* Editorial Heading Style */
 .editorial-heading {
   font-family: 'Cormorant Garamond', serif !important;
-  font-size: clamp(2.8rem, 8vw, 6rem) !important;
-  line-height: 1.1 !important;
+  font-size: clamp(3.2rem, 9vw, 6.8rem) !important;
+  line-height: 1.02 !important;
   font-weight: 500 !important;
-  letter-spacing: -0.02em !important;
+  letter-spacing: -0.03em !important;
   text-align: center !important;
   margin: 0 auto !important;
-  max-width: 900px !important;
+  max-width: 1000px !important;
 }
 
 .editorial-heading .reveal-item {

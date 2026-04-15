@@ -34,9 +34,9 @@ export default function Navbar() {
             <motion.a
               href="#home"
               onClick={(e) => { e.preventDefault(); handleLinkClick('#home') }}
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-              className="flex-shrink-0 h-14"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex-shrink-0 h-10 md:h-12"
             >
               <img
                 src="/logo estics definitivo.svg"
@@ -47,13 +47,13 @@ export default function Navbar() {
             </motion.a>
           </div>
 
-          {/* ── Links Desktop (Perfectly Centered via Grid) ── */}
-          <ul className="hidden md:flex items-center justify-center gap-12">
+          {/* ── Links Desktop ── */}
+          <ul className="hidden md:flex items-center justify-center gap-10">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <button
                   onClick={() => handleLinkClick(link.href)}
-                  className="text-[13px] font-medium tracking-wide text-stone-700 hover:text-stone-900 transition-colors duration-200 py-1"
+                  className="text-[12px] font-bold tracking-[0.1em] uppercase text-stone-600 hover:text-stone-950 transition-colors duration-200 py-1"
                 >
                   <SplitText text={link.label} />
                 </button>
@@ -62,17 +62,17 @@ export default function Navbar() {
           </ul>
 
           {/* ── Right Section (CTA & Hamburger) ── */}
-          <div className="flex justify-end items-center gap-2">
+          <div className="flex justify-end items-center gap-3">
             <motion.button
               onClick={() => handleLinkClick('#contatti')}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="hidden md:flex group items-center gap-3 pl-1.5 pr-5 py-1.5 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-colors duration-300"
+              className="hidden md:flex group items-center gap-3.5 pl-2 pr-6 py-2 rounded-full bg-white border border-stone-200 hover:bg-[#1a1a1a] transition-all duration-500 shadow-sm"
             >
-              <span className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-white group-hover:bg-[#f5ede3] transition-colors duration-300">
-                <ArrowUpRight size={14} strokeWidth={2} color="#6b4226" />
+              <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-stone-50 group-hover:bg-white/10 transition-colors duration-500">
+                <ArrowUpRight size={16} strokeWidth={2} className="text-[#a67c52] group-hover:text-white" />
               </span>
-              <span className="text-[13px] font-medium tracking-wide text-[#6b4226] group-hover:text-white transition-colors duration-300">
+              <span className="text-[13px] font-bold tracking-wide text-[#1a1a1a] group-hover:text-white transition-colors duration-500">
                 Prenota Ora
               </span>
             </motion.button>
