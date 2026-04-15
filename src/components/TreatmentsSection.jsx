@@ -49,9 +49,18 @@ const itemVariants = {
 };
 
 export default function TreatmentsSection() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   return (
-    <section id="servizi" className="w-full pt-20 pb-20 md:pb-48 lg:pb-64 px-6 lg:px-16" style={{ backgroundColor: '#faf9f6' }}>
-      <div className="max-w-7xl mx-auto flex flex-col items-center">
+    <section id="servizi" className="w-full pt-20 pb-20 md:pb-48 lg:pb-56 px-6 lg:px-16" style={{ backgroundColor: '#faf9f6' }}>
+      <div className="max-w-6xl mx-auto flex flex-col items-center">
         
         {/* Badge Top */}
         <motion.div 
@@ -59,83 +68,76 @@ export default function TreatmentsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 0.8 }}
-          className="flex items-center gap-3 px-4 py-1.5 rounded-full mb-20 shadow-sm"
+          className="flex items-center gap-3 px-4 py-1.5 md:px-6 md:py-2 rounded-full mb-12 shadow-sm"
           style={{ backgroundColor: '#fcf8f3', border: '1px solid rgba(166, 124, 82, 0.15)' }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#a67c52]" />
-          <span className="text-[10px] md:text-[11px] font-bold tracking-[0.25em] text-[#a67c52] uppercase">
+          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#a67c52] uppercase">
             I nostri trattamenti
           </span>
         </motion.div>
 
-        {/* Heading Treatment Section */}
-        <div className="w-full max-w-4xl text-center mb-24">
-          <h2 
-            className="text-black font-medium leading-[1.05]"
-            style={{
-              fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(3.5rem, 9vw, 7.5rem)',
-              letterSpacing: '-0.03em'
-            }}
-          >
-            I nostri servizi
-          </h2>
-        </div>
-
-        {/* Cards container: Grid layout to match reference */}
+        {/* Cards container */}
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12"
+          className="w-full flex flex-col gap-6"
         >
           {treatments.map((t, idx) => (
             <motion.div 
               key={idx}
               variants={itemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="group relative w-full border border-stone-200/60 rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-12 lg:p-14 flex flex-col gap-8 hover:border-[#a67c52]/30 hover:bg-[#fcfaf7] transition-all duration-500 bg-[#fdfcfb] shadow-sm overflow-hidden"
+              className="w-full border border-stone-200/80 rounded-[1.5rem] md:rounded-[2.5rem] p-6 md:p-12 lg:p-14 flex flex-col md:flex-row md:items-center justify-between gap-8 md:gap-16 hover:border-[#a67c52]/30 hover:bg-[#f5ede3] hover:shadow-sm transition-all duration-300 bg-[#fdfcfb]"
             >
-              {/* Top Row: Icon + Plus Button */}
-              <div className="flex items-start justify-between">
-                <div className="w-14 h-14 md:w-16 md:h-16 rounded-3xl bg-stone-50 flex items-center justify-center text-[#a67c52] border border-stone-100/50 group-hover:scale-110 transition-transform duration-500 shadow-sm">
-                  {React.cloneElement(t.icon, { size: 28 })}
+              
+              {/* Left Side: Icon + Title */}
+              <div className="flex items-center gap-6 md:w-1/2">
+                <div className={`${isMobile ? 'scale-90' : 'scale-100'} transition-transform duration-300`}>
+                  {t.icon}
                 </div>
-                <button 
-                  className="w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center border border-stone-200 bg-white hover:bg-[#1a1a1a] hover:border-[#1a1a1a] hover:text-white transition-all duration-500 shadow-sm"
-                  aria-label="Espandi trattamento"
-                >
-                  <Plus size={24} strokeWidth={1.5} />
-                </button>
-              </div>
-
-              {/* Middle: Title + Description */}
-              <div className="flex flex-col gap-4 py-4">
                 <h3 
-                  className="text-black font-medium leading-tight"
+                  className="text-black font-medium"
                   style={{
                     fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: 'clamp(2.2rem, 4vw, 3.2rem)',
-                    letterSpacing: '-0.02em'
+                    fontSize: isMobile ? '1.85rem' : 'clamp(1.8rem, 4vw, 2.8rem)',
+                    lineHeight: isMobile ? 1.1 : 1.2,
+                    letterSpacing: isMobile ? '-0.02em' : 'normal'
                   }}
                 >
                   {t.title}
                 </h3>
-                <p className="text-black/60 text-[15px] md:text-base leading-relaxed max-w-sm">
-                  {t.description}
-                </p>
               </div>
 
-              {/* Bottom: View Detail Button */}
-              <div className="mt-auto">
-                <button className="flex items-center gap-3.5 px-6 py-2.5 rounded-full bg-white border border-stone-200 hover:border-[#a67c52]/40 hover:text-[#a67c52] transition-all duration-500 text-[13px] font-bold tracking-widest uppercase shadow-sm">
-                  Scopri i dettagli
+              {/* Right Side: Desc + Action buttons */}
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 md:w-1/2">
+                <div className="flex flex-col gap-4 max-w-sm">
+                  <p className={`text-black/80 lg:text-[15px] leading-relaxed ${isMobile ? 'text-[15px] leading-[1.6]' : 'text-sm'}`}>
+                    {t.description}
+                  </p>
+                  <div>
+                    <button className="group flex items-center gap-3 pl-1.5 pr-5 py-1.5 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-colors duration-300 w-fit">
+                      <span className="w-8 h-8 rounded-full flex items-center justify-center bg-white group-hover:bg-[#f5ede3] transition-colors duration-300">
+                        <ArrowUpRight size={14} strokeWidth={2} color="#6b4226" />
+                      </span>
+                      <span className="text-[12px] font-semibold tracking-wide text-[#6b4226] group-hover:text-white transition-colors duration-300 uppercase">
+                        Scopri i dettagli
+                      </span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Plus Button */}
+                <button 
+                  className="w-12 h-12 rounded-full flex items-center justify-center border border-stone-200 bg-white hover:bg-[#fcf8f3] hover:border-[#a67c52]/40 transition-colors shadow-sm ml-auto md:ml-0 flex-shrink-0"
+                  aria-label="Espandi trattamento"
+                >
+                  <Plus size={20} className="text-[#a67c52]" />
                 </button>
               </div>
 
-              {/* Decorative accent */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-radial-gradient from-[#a67c52]/[0.03] to-transparent pointer-events-none" />
             </motion.div>
           ))}
         </motion.div>

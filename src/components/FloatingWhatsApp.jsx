@@ -16,14 +16,14 @@ export default function FloatingWhatsApp() {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={handleWhatsApp}
-        className="fixed bottom-6 right-6 z-[9999] bg-[#25D366] text-white p-3 rounded-full shadow-lg flex items-center justify-center hover:bg-[#128C7E] transition-colors group cursor-pointer"
+        className="fixed bottom-6 right-6 z-[9999] bg-[#25D366] text-white p-2.5 rounded-full shadow-lg flex items-center justify-center hover:bg-[#128C7E] transition-colors group cursor-pointer"
         aria-label="Contattaci su WhatsApp"
       >
         {/* WhatsApp Logo SVG */}
         <svg 
           viewBox="0 0 24 24" 
-          width="24" 
-          height="24" 
+          width="20" 
+          height="20" 
           fill="currentColor" 
           xmlns="http://www.w3.org/2000/svg"
         >
@@ -31,9 +31,9 @@ export default function FloatingWhatsApp() {
         </svg>
 
         {/* Pulse Indicator */}
-        <span className="absolute top-0 right-0 flex h-2 w-2">
+        <span className="absolute top-0 right-0 flex h-1.5 w-1.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
+          <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
         </span>
       </motion.button>
     </AnimatePresence>

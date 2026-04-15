@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 export default function MedicalSection() {
   return (
-    <section className="w-full py-20 md:py-48 lg:py-56 px-6 lg:px-16" style={{ backgroundColor: '#faf9f6' }}>
+    <section className="w-full py-24 md:py-48 lg:py-56 px-6 lg:px-16" style={{ backgroundColor: '#faf9f6' }}>
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
         
         {/* Left Column: Text & Checklist */}
@@ -16,8 +16,8 @@ export default function MedicalSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-3 px-5 py-2 rounded-full mb-8 self-start shadow-sm"
-            style={{ backgroundColor: '#fcf8f3', border: '1px solid rgba(166, 124, 82, 0.1)' }}
+            className="inline-flex items-center gap-3 px-4 py-1.5 md:px-5 md:py-2 rounded-full mb-8 self-start shadow-sm"
+            style={{ backgroundColor: '#fcf8f3', border: '1px solid rgba(166, 124, 82, 0.15)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#a67c52]" />
             <span className="text-[10px] md:text-xs font-bold tracking-[0.15em] text-[#a67c52] uppercase">
@@ -61,39 +61,41 @@ export default function MedicalSection() {
             variants={{
               visible: { transition: { staggerChildren: 0.1 } }
             }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-y-8 lg:gap-y-6 gap-x-4 mb-12 lg:mb-0"
           >
             {[
-              "Anti-aging e rigenerazione viso",
-              "Biorivitalizzazione e glow-up",
-              "Trattamenti viso idratanti e detox",
-              "Peeling e correzione discromie"
+              "Acne e imperfezioni",
+              "Biorivitalizzazione viso",
+              "Cura dell'eczema",
+              "Correzione discromie"
             ].map((item, i) => (
               <motion.div 
                 key={i}
                 variants={{ hidden: { opacity: 0, x: -10 }, visible: { opacity: 1, x: 0 } }}
                 className="flex items-center gap-4"
               >
-                <CheckCircle2 size={24} className="text-[#a67c52]" strokeWidth={1.5} />
-                <span className="text-black font-medium text-sm md:text-base">{item}</span>
+                <div className="w-6 h-6 rounded-full bg-[#fcf8f3] border border-[#a67c52]/30 flex items-center justify-center shrink-0">
+                  <CheckCircle2 size={14} className="text-[#a67c52]" strokeWidth={2.5} />
+                </div>
+                <span className="text-black/80 font-medium text-[15px] lg:text-base leading-none">{item}</span>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Call to Action */}
+          {/* Call to Action (Mobile refined) */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.6, duration: 0.8 }}
-            className="mt-10"
+            className="mt-4 lg:mt-10"
           >
-            <button className="group flex items-center gap-3 pl-2 pr-6 py-2 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-colors duration-300 w-fit shadow-md">
+            <button className="group flex items-center gap-3 pl-1.5 pr-6 py-1.5 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-all duration-300 w-fit shadow-sm">
               <span className="w-10 h-10 rounded-full flex items-center justify-center bg-white group-hover:bg-[#f5ede3] transition-colors duration-300">
-                <ArrowUpRight size={16} strokeWidth={2} color="#6b4226" />
+                <ArrowUpRight size={18} strokeWidth={2} className="text-[#6b4226]" />
               </span>
-              <span className="text-[14px] font-semibold tracking-wider text-[#6b4226] group-hover:text-white transition-colors duration-300 uppercase">
-                Chiama ora
+              <span className="text-[13px] font-semibold tracking-wide text-[#6b4226] group-hover:text-white transition-colors duration-300 uppercase">
+                Prenota
               </span>
             </button>
           </motion.div>
@@ -118,13 +120,13 @@ export default function MedicalSection() {
             />
           </motion.div>
 
-          {/* Floating Glassmorphism Badge */}
+          {/* Floating Glassmorphism Badge (Reverted style, fixed position) */}
           <motion.div 
-            initial={{ opacity: 0, y: 40 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5, duration: 1 }}
-            className="absolute -bottom-6 -left-2 md:-left-8 lg:-left-12 bg-[#8b6a4b]/70 backdrop-blur-xl border border-white/20 rounded-3xl p-6 md:p-8 flex flex-col items-start gap-4 shadow-xl max-w-[280px]"
+            className="absolute -bottom-6 -left-4 md:-left-8 lg:-left-12 bg-[#8b6a4b]/80 backdrop-blur-xl border border-white/20 rounded-3xl p-6 md:p-8 flex flex-col items-start gap-4 shadow-xl w-[85%] md:w-auto max-w-[300px] lg:max-w-[280px]"
           >
              <MessageCircle size={32} className="text-white shrink-0" strokeWidth={1.5} />
              <p className="text-white text-lg md:text-2xl font-serif max-w-full leading-tight" style={{ fontFamily: 'Cormorant Garamond, serif' }}>

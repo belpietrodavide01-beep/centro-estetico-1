@@ -39,26 +39,35 @@ const bentoItemVariants = {
 };
 
 export default function BentoGridSection() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   const marqueeRef = useRef(null);
   const isInView = useInView(marqueeRef, { amount: 0.1 });
 
   return (
-    <section className="w-full py-24 md:py-48 lg:py-64 px-6 lg:px-16" style={{ backgroundColor: '#faf9f6' }}>
+    <section className="w-full py-24 md:py-48 lg:py-56 px-6 lg:px-16" style={{ backgroundColor: '#faf9f6' }}>
       <div className="max-w-7xl mx-auto flex flex-col gap-6">
         
         {/* Title Section */}
-        <div className="flex flex-col items-center justify-center text-center mb-20">
+        <div className="flex flex-col items-center justify-center text-center mb-16">
           {/* Badge Top */}
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 px-4 py-1.5 rounded-full mb-16 shadow-sm"
+            className="flex items-center gap-3 px-4 py-1.5 md:px-6 md:py-2 rounded-full mb-12 shadow-sm"
             style={{ backgroundColor: '#fcf8f3', border: '1px solid rgba(166, 124, 82, 0.15)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-[#a67c52]" />
-            <span className="text-[10px] md:text-[11px] font-bold tracking-[0.25em] text-[#a67c52] uppercase">
+            <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#a67c52] uppercase">
               Perché i nostri clienti ci scelgono
             </span>
           </motion.div>
@@ -71,9 +80,9 @@ export default function BentoGridSection() {
             className="text-black font-medium max-w-4xl"
             style={{
               fontFamily: 'Cormorant Garamond, serif',
-              fontSize: 'clamp(3.5rem, 9vw, 7.5rem)',
+              fontSize: 'clamp(3.2rem, 8vw, 7rem)',
               lineHeight: '1.05',
-              letterSpacing: '-0.03em'
+              letterSpacing: '-0.02em'
             }}
           >
             Leader nel settore
@@ -88,47 +97,57 @@ export default function BentoGridSection() {
           variants={{
             visible: { transition: { staggerChildren: 0.15 } }
           }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-fr"
         >
           
           {/* ================= COLUMN 1 ================= */}
-          <div className="flex flex-col gap-8 h-full">
+          <div className="flex flex-col gap-6 h-full">
             
             {/* Box 1: Before / After */}
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="relative w-full h-[320px] md:h-[420px] rounded-[2.5rem] overflow-hidden bg-[#e6ded5] group cursor-pointer shadow-sm border border-black/5"
+              className="relative w-full h-[320px] md:h-[400px] rounded-[2.5rem] overflow-hidden bg-[#e6ded5] group cursor-pointer shadow-sm"
             >
               <img src="/before-after.png" alt="Risultati Prima e Dopo" loading="lazy" decoding="async" className="absolute inset-0 w-full h-full object-cover" />
               
               {/* Labels Prima / Dopo */}
-              <div className="absolute top-5 left-5 bg-white/90 backdrop-blur-sm px-3.5 py-1.5 rounded-full text-[10px] tracking-widest font-bold uppercase text-black shadow-sm z-10">
+              <div className="absolute top-6 left-6 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase text-black shadow-sm z-10">
                 Prima
               </div>
-              <div className="absolute top-5 right-5 bg-white/90 backdrop-blur-sm px-3.5 py-1.5 rounded-full text-[10px] tracking-widest font-bold uppercase text-black shadow-sm z-10">
+              <div className="absolute top-6 right-6 bg-white/90 backdrop-blur-sm px-4 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase text-black shadow-sm z-10">
                 Dopo
               </div>
 
               {/* Glass overlay text */}
               <div 
-                className="absolute inset-x-5 bottom-5 bg-stone-900/60 backdrop-blur-xl border border-white/10 rounded-[1.8rem] flex flex-col p-7 z-10 shadow-xl"
+                className={`absolute inset-x-4 bottom-4 bg-[#916b4a]/70 backdrop-blur-xl border border-white/20 rounded-[2rem] flex flex-col ${isMobile ? 'p-6' : 'p-8'} z-10 shadow-2xl`}
                 style={{ willChange: 'backdrop-filter' }}
               >
-                <h3 className="text-white text-2xl md:text-3xl font-serif mb-4 leading-tight" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                  Risultati reali,<br />storie di bellezza
-                </h3>
-                <div className="flex items-center gap-5 text-white/80 text-[12px] font-medium tracking-wide">
-                  <span className="flex items-center gap-2"><Calendar size={14} className="opacity-70" /> 12 Settimane</span>
-                  <span className="flex items-center gap-2"><Sparkles size={14} className="opacity-70" /> Illuminante</span>
+                {/* Two Column Title */}
+                <div className="flex justify-between items-baseline mb-3 gap-2">
+                  <h3 className="text-white text-xl md:text-3xl font-serif leading-tight shrink-0" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                    Risultati reali,
+                  </h3>
+                  <h3 className="text-white text-xl md:text-3xl font-serif leading-tight text-right w-full" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                    storie di bellezza
+                  </h3>
+                </div>
+
+                {/* Two Column Subtitle */}
+                <div className="flex justify-between items-center text-white/90 text-[11px] font-medium tracking-wide">
+                  <span className="flex items-center gap-2 w-1/2 shrink-0"><Calendar size={14} strokeWidth={2.5} /> 12 Settimane</span>
+                  <span className="flex items-center gap-2 justify-end w-full"><Sparkles size={14} strokeWidth={2.5} /> Trattamento Acne</span>
                 </div>
               </div>
               
               {/* Simulator line */}
               <div className="absolute inset-y-0 left-1/2 w-[1px] bg-white/40 flex items-center justify-center -translate-x-1/2 z-20">
-                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
-                  <ChevronLeft size={14} color="white" />
-                  <ChevronRight size={14} color="white" />
+                <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/40 shadow-lg">
+                  <div className="flex items-center gap-1">
+                    <ChevronLeft size={14} color="white" strokeWidth={3} />
+                    <ChevronRight size={14} color="white" strokeWidth={3} />
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -137,22 +156,27 @@ export default function BentoGridSection() {
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="w-full flex-grow rounded-[2.5rem] bg-[#f8f4f0] p-10 flex flex-col items-center justify-center text-center shadow-sm border border-black/5"
+              className="w-full flex-grow rounded-[2.5rem] bg-[#fdfcfb] p-10 flex flex-col items-center justify-center text-center shadow-sm border border-stone-200/50"
             >
-              <div className="w-14 h-14 rounded-full bg-white flex items-center justify-center mb-6 text-[#a67c52] font-bold text-[10px] uppercase tracking-[0.2em] shadow-sm">
-                Gratis
+              <div className="relative mb-6">
+                 {/* Star badge from reference image 2 */}
+                 <div className="w-14 h-14 rounded-full bg-[#fcf8f3] border-2 border-[#a67c52]/20 flex items-center justify-center text-[#a67c52] font-bold text-[10px] uppercase tracking-widest shadow-inner">
+                   FREE
+                 </div>
               </div>
+
               <h3 className="text-black text-3xl font-serif mb-3" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                 Analisi della pelle
               </h3>
-              <p className="text-black/60 text-sm mb-8 leading-relaxed max-w-[240px]">
-                Consulenza esperta personalizzata per le tue esigenze
+              <p className="text-black/60 text-base mb-8 max-w-[200px] leading-relaxed">
+                Consulenza esperta completamente gratuita
               </p>
-              <button className="group flex items-center gap-4 pl-2 pr-6 py-2 rounded-full bg-white border border-stone-200 hover:bg-[#1a1a1a] transition-all duration-500 w-fit shadow-sm">
-                <span className="w-10 h-10 rounded-full flex items-center justify-center bg-[#f8f4f0] group-hover:bg-white/10 transition-colors duration-500">
-                  <ArrowUpRight size={16} strokeWidth={2} className="text-[#a67c52] group-hover:text-white" />
+              
+              <button className="group flex items-center gap-3 pl-1.5 pr-6 py-1.5 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-all duration-300 w-fit shadow-sm">
+                <span className="w-9 h-9 rounded-full flex items-center justify-center bg-white group-hover:bg-[#f5ede3] transition-colors duration-300">
+                  <ArrowUpRight size={16} strokeWidth={2} className="text-[#6b4226]" />
                 </span>
-                <span className="text-[14px] font-semibold text-[#1a1a1a] group-hover:text-white transition-colors duration-500">
+                <span className="text-[13px] font-semibold tracking-wide text-[#6b4226] group-hover:text-white transition-colors duration-300 uppercase">
                   Prenota ora
                 </span>
               </button>
@@ -161,42 +185,50 @@ export default function BentoGridSection() {
           </div>
 
           {/* ================= COLUMN 2 ================= */}
-          <div className="flex flex-col gap-8 h-full">
+          <div className="flex flex-col gap-6 h-full">
 
             {/* Box 3: Seamless Client */}
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="w-full h-[200px] md:h-[240px] rounded-[2.5rem] bg-[#fdfcfb] p-10 relative overflow-hidden shadow-sm flex flex-col justify-between border border-black/5"
+              className={`w-full rounded-[2.5rem] bg-[#fdfcfb] border border-stone-200/50 p-6 md:p-8 relative overflow-hidden shadow-sm flex flex-col justify-between ${isMobile ? 'h-[320px]' : 'h-[180px] md:h-[220px]'}`}
             >
-              <h3 className="text-black text-3xl md:text-4xl font-serif leading-[1.1] z-10 max-w-[220px]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                Un'esperienza impeccabile
+              <h3 className="text-black text-2xl md:text-3xl lg:text-4xl font-serif leading-none z-10 max-w-[200px] mb-4" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                Un'esperienza cliente impeccabile
               </h3>
-              <img src="/hero-2.png" alt="Mani" loading="lazy" decoding="async" className="absolute -bottom-12 -right-12 w-72 h-72 object-contain opacity-40 mix-blend-multiply transition-transform duration-700 group-hover:scale-110" />
+              <div className={`mt-auto ml-auto w-[85%] h-[60%] rounded-[1.8rem] overflow-hidden shadow-md transition-transform duration-700 ${isMobile ? 'scale-100' : 'hover:scale-105'}`}>
+                <img 
+                  src="/hero-2.png" 
+                  alt="Trattamento" 
+                  loading="lazy" 
+                  decoding="async" 
+                  className="w-full h-full object-cover" 
+                />
+              </div>
             </motion.div>
 
             {/* Box 4: Tailored to vision */}
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="w-full flex-grow rounded-[2.5rem] bg-[#f8f4f0] p-10 flex flex-col items-center justify-center text-center shadow-sm border border-black/5"
+              className="w-full flex-grow rounded-[2.5rem] bg-[#fdfcfb] border border-stone-200/50 p-10 flex flex-col items-center justify-center text-center shadow-sm"
             >
               <div className="flex items-center justify-center mb-8">
-                <div className="w-18 h-18 rounded-full overflow-hidden border-2 border-white z-20 shadow-md">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-white z-20 shadow-xl">
                   <img src="/hero-1.png" alt="avatar" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
-                <div className="w-22 h-22 rounded-full overflow-hidden border-4 border-white -ml-4 z-30 shadow-xl scale-110">
+                <div className="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-4 border-white -ml-4 z-30 shadow-2xl scale-110 transition-transform hover:scale-125 duration-500">
                   <img src="/hero-3.png" alt="avatar" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
-                <div className="w-18 h-18 rounded-full overflow-hidden border-2 border-white -ml-4 z-20 shadow-md">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full overflow-hidden border-2 border-white -ml-4 z-20 shadow-xl">
                   <img src="/hero-4.png" alt="avatar" loading="lazy" decoding="async" className="w-full h-full object-cover" />
                 </div>
               </div>
               <h3 className="text-black text-3xl font-serif mb-4" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                 Su misura per te
               </h3>
-              <p className="text-black/60 text-sm max-w-[260px] leading-relaxed">
-                Piani di trattamento personalizzati per ogni tipo di inestetismo.
+              <p className="text-black/60 text-base max-w-xs leading-relaxed">
+                Piani di trattamento personalizzati per esaltare la tua bellezza unica.
               </p>
             </motion.div>
 
@@ -204,32 +236,32 @@ export default function BentoGridSection() {
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="w-full h-[160px] md:h-[200px] rounded-[2.5rem] bg-[#e6ded5] overflow-hidden shadow-sm border border-black/5"
+              className={`w-full rounded-[2.5rem] bg-[#e6ded5] overflow-hidden shadow-sm ${isMobile ? 'h-[250px]' : 'h-[150px] md:h-[180px]'}`}
             >
-              <img src="/hero-4.png" alt="Clinic" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-90 object-center transition-transform duration-1000 group-hover:scale-105" />
+              <img src="/hero-4.png" alt="Clinic" loading="lazy" decoding="async" className="w-full h-full object-cover opacity-90 object-center transition-transform duration-[2s] hover:scale-110" />
             </motion.div>
 
           </div>
 
           {/* ================= COLUMN 3 ================= */}
-          <div className="flex flex-col gap-8 h-full">
+          <div className="flex flex-col gap-6 h-full">
 
             {/* Box 6: 10+ Years */}
             <motion.div 
               variants={bentoItemVariants}
               style={{ willChange: 'transform, opacity' }}
-              className="w-full h-[200px] md:h-[240px] rounded-[2.5rem] bg-[#fdfcfb] p-10 relative overflow-hidden shadow-sm flex flex-col justify-center border border-black/5"
+              className={`w-full rounded-[2.5rem] bg-[#fcf8f3] p-10 relative overflow-hidden shadow-sm flex flex-col justify-center border border-[#a67c52]/10 ${isMobile ? 'h-[320px]' : 'h-[180px] md:h-[220px]'}`}
             >
-              <div className="absolute text-[9rem] font-serif text-black/[0.03] bottom-[-3rem] right-[-1rem] leading-none whitespace-nowrap select-none pointer-events-none" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+              <div className="absolute text-[10rem] font-serif text-[#a67c52]/[0.05] bottom-[-3rem] right-[-1rem] leading-none whitespace-nowrap select-none pointer-events-none" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
                 2016
               </div>
-              <h3 className="text-black text-6xl font-serif mb-2" style={{ fontFamily: 'Cormorant Garamond, serif' }}>10+</h3>
-              <p className="text-black/60 text-sm mb-6 max-w-[160px] leading-relaxed font-medium">
-                Anni di eccellenza nel benessere estetico
+              <h3 className="text-[#a67c52] text-6xl font-serif mb-3" style={{ fontFamily: 'Cormorant Garamond, serif' }}>10+</h3>
+              <p className="text-black/70 text-[15px] mb-8 max-w-[180px] leading-relaxed">
+                Anni di eccellenza nel settore estetico professionale
               </p>
-              <div className="flex flex-col gap-2.5">
-                <span className="px-4 py-1.5 bg-stone-100/80 rounded-full text-[11px] font-bold tracking-wider text-[#8c6b4a] w-max uppercase">2,000+ Procedure</span>
-                <span className="px-4 py-1.5 bg-stone-100/80 rounded-full text-[11px] font-bold tracking-wider text-[#8c6b4a] w-max uppercase">50+ Trattamenti</span>
+              <div className="flex flex-wrap gap-2.5 z-10">
+                <span className="px-4 py-1.5 bg-white/90 border border-[#a67c52]/20 rounded-full text-[11px] font-bold tracking-wider text-[#a67c52] uppercase shadow-sm">2,000+ Clienti</span>
+                <span className="px-4 py-1.5 bg-white/90 border border-[#a67c52]/20 rounded-full text-[11px] font-bold tracking-wider text-[#a67c52] uppercase shadow-sm">50+ Trattamenti</span>
               </div>
             </motion.div>
 

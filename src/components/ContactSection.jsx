@@ -60,10 +60,14 @@ export default function ContactSection() {
             
             <a 
               href="tel:+390422820820"
-              className="w-full sm:w-auto px-8 py-5 md:px-10 md:py-6 bg-[#a67c52] text-white rounded-[2rem] font-bold text-xs md:text-sm tracking-widest uppercase hover:bg-[#8e6542] transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 active:scale-95"
+              className="w-full sm:w-auto group flex items-center gap-3 pl-2 pr-8 py-2 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-all duration-300 shadow-xl hover:shadow-2xl active:scale-95"
             >
-              <Phone size={20} />
-              Chiamaci Ora
+              <span className="w-12 h-12 rounded-full flex items-center justify-center bg-white group-hover:bg-[#f5ede3] transition-colors duration-300">
+                <Phone size={20} className="text-[#6b4226]" />
+              </span>
+              <span className="text-[13px] font-bold tracking-widest text-[#6b4226] group-hover:text-white transition-colors duration-300 uppercase">
+                Chiamaci Ora
+              </span>
             </a>
           </motion.div>
         </div>

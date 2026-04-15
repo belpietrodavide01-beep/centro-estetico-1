@@ -57,7 +57,7 @@ const IntroductionSection = () => {
   return (
     <section 
       ref={containerRef} 
-      className="relative lg:min-h-screen w-full flex flex-col items-center justify-start lg:justify-center overflow-hidden pt-20 lg:pt-0 pb-32 lg:pb-0 bg-[#faf9f6]"
+      className="relative lg:min-h-screen w-full flex flex-col items-center justify-start lg:justify-center overflow-hidden pt-20 lg:pt-0 pb-24 lg:pb-0 bg-[#faf9f6]"
     >
       {/* Decorative Assets - Rising Images */}
       {imageAssets.map((src, i) => (
@@ -91,28 +91,39 @@ const IntroductionSection = () => {
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-16 flex flex-col items-center text-center">
         {/* Badge Top */}
         <div 
-          className="flex items-center gap-3 px-4 py-1.5 rounded-full mb-16 shadow-sm"
+          className="flex items-center gap-3 px-4 py-1.5 md:px-6 md:py-2 rounded-full mb-12 shadow-sm"
           style={{ backgroundColor: '#fcf8f3', border: '1px solid rgba(166, 124, 82, 0.15)' }}
         >
           <span className="w-1.5 h-1.5 rounded-full bg-[#a67c52]" />
-          <span className="text-[10px] md:text-[11px] font-bold tracking-[0.25em] text-[#a67c52] uppercase">
+          <span className="text-[10px] md:text-xs font-bold tracking-[0.2em] text-[#a67c52] uppercase">
             Eccellenza in ogni percorso
           </span>
         </div>
 
         {/* Main Content with Scroll Reveal */}
-        <div className="relative w-full max-w-4xl mx-auto mb-16">
+        <div className="relative w-full max-w-4xl mx-auto">
           <ScrollReveal
-            baseColor="#b7b1af"
-            activeColor="#1a1a1a"
-            className="editorial-heading"
+            baseColor="#99928f"
+            activeColor="#000000"
+            className="editorial-heading mobile-text-adjustment"
           >
             L'eccellenza dell'estetica avanzata per una bellezza naturale e radiosa.
           </ScrollReveal>
         </div>
 
+        <style jsx>{`
+          @media (max-width: 767px) {
+            .mobile-text-adjustment {
+              line-height: 1.15 !important;
+              letter-spacing: -0.02em !important;
+              max-width: 90% !important;
+              margin: 0 auto !important;
+            }
+          }
+        `}</style>
+
         {/* Bottom Social Proof */}
-        <div className="flex flex-col items-center gap-4 mt-8 opacity-90">
+        <div className="flex flex-col items-center gap-3 mt-12 opacity-80">
           <div className="flex items-center gap-4">
             <div 
               className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm"

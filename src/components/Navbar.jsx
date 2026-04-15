@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, ArrowUpRight } from 'lucide-react'
 import SplitText from './react-bits/SplitText'
@@ -12,6 +12,8 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   const handleLinkClick = (href) => {
     setMenuOpen(false)
@@ -19,13 +21,31 @@ export default function Navbar() {
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768)
+    }
+    
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleResize)
+    handleResize() // Initial check
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
   return (
     <>
       <motion.header
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="w-full bg-transparent"
+        className={`sticky top-0 left-0 w-full z-50 transition-all duration-300 ${isScrolled || menuOpen ? 'bg-[#faf9f6]/95 backdrop-blur-md border-b border-stone-200/50 py-1' : 'bg-transparent py-4'}`}
       >
         <nav className="w-full px-4 md:px-6 lg:px-16 h-20 flex items-center justify-between md:grid md:grid-cols-3">
 
@@ -34,9 +54,9 @@ export default function Navbar() {
             <motion.a
               href="#home"
               onClick={(e) => { e.preventDefault(); handleLinkClick('#home') }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="flex-shrink-0 h-10 md:h-12"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+              className="flex-shrink-0 h-14"
             >
               <img
                 src="/logo estics definitivo.svg"
@@ -47,13 +67,13 @@ export default function Navbar() {
             </motion.a>
           </div>
 
-          {/* ── Links Desktop ── */}
-          <ul className="hidden md:flex items-center justify-center gap-10">
+          {/* ── Links Desktop (Perfectly Centered via Grid) ── */}
+          <ul className="hidden md:flex items-center justify-center gap-12">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <button
                   onClick={() => handleLinkClick(link.href)}
-                  className="text-[12px] font-bold tracking-[0.1em] uppercase text-stone-600 hover:text-stone-950 transition-colors duration-200 py-1"
+                  className="text-[13px] font-medium tracking-wide text-stone-700 hover:text-stone-900 transition-colors duration-200 py-1"
                 >
                   <SplitText text={link.label} />
                 </button>
@@ -62,17 +82,17 @@ export default function Navbar() {
           </ul>
 
           {/* ── Right Section (CTA & Hamburger) ── */}
-          <div className="flex justify-end items-center gap-3">
+          <div className="flex justify-end items-center gap-2">
             <motion.button
               onClick={() => handleLinkClick('#contatti')}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
-              className="hidden md:flex group items-center gap-3.5 pl-2 pr-6 py-2 rounded-full bg-white border border-stone-200 hover:bg-[#1a1a1a] transition-all duration-500 shadow-sm"
+              className="hidden md:flex group items-center gap-3 pl-1.5 pr-5 py-1.5 rounded-full bg-[#f5ede3] border border-black/20 hover:bg-[#6b4226] transition-colors duration-300"
             >
-              <span className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 bg-stone-50 group-hover:bg-white/10 transition-colors duration-500">
-                <ArrowUpRight size={16} strokeWidth={2} className="text-[#a67c52] group-hover:text-white" />
+              <span className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-white group-hover:bg-[#f5ede3] transition-colors duration-300">
+                <ArrowUpRight size={14} strokeWidth={2} color="#6b4226" />
               </span>
-              <span className="text-[13px] font-bold tracking-wide text-[#1a1a1a] group-hover:text-white transition-colors duration-500">
+              <span className="text-[13px] font-medium tracking-wide text-[#6b4226] group-hover:text-white transition-colors duration-300">
                 Prenota Ora
               </span>
             </motion.button>

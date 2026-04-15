@@ -79,7 +79,21 @@ export default function TestimonialSection() {
         <div className="w-full lg:w-2/3 flex flex-col justify-between">
           
           {/* Header Row */}
-          <div className="flex flex-row flex-wrap items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col lg:flex-row items-center lg:items-end lg:justify-between gap-10 lg:gap-6 mb-16 lg:mb-12 text-center lg:text-left">
+            
+            {/* Mobile-Only Rating (Image 4) */}
+            <div className="flex lg:hidden flex-col items-center gap-4">
+              <div className="flex items-center gap-1.5">
+                {[...Array(5)].map((_, i) => <Star key={i} size={18} className="fill-[#a67c52] text-[#a67c52]" />)}
+              </div>
+              <h3 className="text-6xl font-serif text-black leading-none" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                99%
+              </h3>
+              <p className="text-[12px] font-bold tracking-[0.15em] text-[#a67c52] uppercase">
+                2k+ Global trusted customers
+              </p>
+            </div>
+
             <motion.h2 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -93,7 +107,7 @@ export default function TestimonialSection() {
                 letterSpacing: '-0.02em'
               }}
             >
-              Cosa dicono i <br /> nostri clienti
+              Cosa dicono i <br className="hidden lg:block" /> nostri clienti
             </motion.h2>
             
             {/* Arrows */}

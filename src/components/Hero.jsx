@@ -39,11 +39,11 @@ function useResponsive() {
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setValues({
-        radius: mobile ? 160 : 250,
+        radius: mobile ? 180 : 250,
         notchW: mobile ? 180 : 220,
         isMobile: mobile,
-        pillScale: mobile ? 0.7 : 1,
-        titleScale: mobile ? 0.65 : 1
+        pillScale: mobile ? 0.75 : 1,
+        titleScale: mobile ? 0.82 : 1
       });
     };
     handleResize();
@@ -56,6 +56,7 @@ function useResponsive() {
 
 function ServicePill({ name, img, scale }) {
   const [hasError, setHasError] = useState(false);
+  const isMobileScale = scale < 1;
   
   return (
     <div
@@ -63,15 +64,15 @@ function ServicePill({ name, img, scale }) {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        padding: `${10 * scale}px ${8 * scale}px ${16 * scale}px`,
-        gap: `${10 * scale}px`,
+        padding: isMobileScale ? `${10 * scale}px ${8 * scale}px ${16 * scale}px` : `${12 * scale}px ${8 * scale}px ${18 * scale}px`,
+        gap: isMobileScale ? `${10 * scale}px` : `${12 * scale}px`,
         width: `${50 * scale}px`,
-        height: `${210 * scale}px`,
-        background: 'rgba(255, 255, 255, 0.4)',
-        backdropFilter: 'blur(8px)',
-        border: '1px solid rgba(255, 255, 255, 0.6)',
+        height: isMobileScale ? `${210 * scale}px` : `${215 * scale}px`,
+        background: isMobileScale ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255,255,255,0.3)',
+        backdropFilter: isMobileScale ? 'blur(8px)' : 'none',
+        border: isMobileScale ? '1px solid rgba(255, 255, 255, 0.6)' : '0.8px solid rgba(255,255,255,0.5)',
         borderRadius: '999px',
-        boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
+        boxShadow: isMobileScale ? '0 4px 15px rgba(0,0,0,0.03)' : '0 10px 25px rgba(0,0,0,0.06)',
         position: 'relative',
         overflow: 'hidden',
         willChange: 'transform',
@@ -81,13 +82,13 @@ function ServicePill({ name, img, scale }) {
     >
       <div
         style={{
-          width: `${34 * scale}px`,
-          height: `${34 * scale}px`,
+          width: isMobileScale ? `${34 * scale}px` : `${36 * scale}px`,
+          height: isMobileScale ? `${34 * scale}px` : `${36 * scale}px`,
           borderRadius: '50%',
           overflow: 'hidden',
-          border: '1.5px solid rgba(255, 255, 255, 0.9)',
+          border: isMobileScale ? '1.5px solid rgba(255, 255, 255, 0.9)' : '1.5px solid rgba(255,255,255,0.8)',
           flexShrink: 0,
-          backgroundColor: '#f8f4f0',
+          backgroundColor: isMobileScale ? '#f8f4f0' : '#efe5d8', // Fallback background color
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center'
@@ -103,7 +104,7 @@ function ServicePill({ name, img, scale }) {
           />
         ) : (
           <span style={{ 
-            fontSize: `${12 * scale}px`, 
+            fontSize: isMobileScale ? `${12 * scale}px` : `${14 * scale}px`, 
             fontWeight: 700, 
             color: '#a67c52',
             fontFamily: 'Cormorant Garamond, serif'
@@ -114,11 +115,11 @@ function ServicePill({ name, img, scale }) {
       </div>
       <span
         style={{
-          color: 'rgba(60, 50, 40, 0.9)',
-          fontSize: `${7.5 * scale}px`,
+          color: isMobileScale ? 'rgba(60, 50, 40, 0.9)' : 'rgba(74, 68, 63, 0.85)',
+          fontSize: isMobileScale ? `${7.5 * scale}px` : `${8 * scale}px`,
           fontFamily: 'Inter, sans-serif',
-          fontWeight: 700,
-          letterSpacing: '0.12em',
+          fontWeight: isMobileScale ? 700 : 600,
+          letterSpacing: isMobileScale ? '0.12em' : '0.1em',
           textTransform: 'uppercase',
           writingMode: 'vertical-rl',
           textOrientation: 'mixed',
@@ -236,8 +237,9 @@ export default function Hero() {
                 fontFamily: 'Cormorant Garamond, serif',
                 fontSize: `clamp(2.5rem, ${10 * titleScale}vw, ${8 * titleScale}rem)`,
                 textShadow: '0 4px 30px rgba(255,255,255,0.8)',
-                maxWidth: isMobile ? '280px' : 'none',
-                lineHeight: '1.2'
+                maxWidth: isMobile ? '350px' : 'none',
+                lineHeight: isMobile ? 1.05 : 1.2,
+                letterSpacing: isMobile ? '-0.03em' : 'inherit'
               }}
             >
               Rigenera la tua essenza
@@ -247,7 +249,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="text-black/90 mt-5 max-w-xl font-medium gpu-layer"
+              className={`text-black/90 max-w-xl font-medium gpu-layer ${isMobile ? 'mt-8' : 'mt-5'}`}
               style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: isMobile ? '0.75rem' : 'clamp(0.85rem, 2vw, 1.15rem)',
