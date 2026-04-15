@@ -173,7 +173,7 @@ export default function Hero({ isMenuOpen }) {
     <section
       id="home"
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-start px-6 lg:px-16 pt-2 md:pt-5 pb-0"
+      className="min-h-screen flex flex-col items-center justify-start px-6 lg:px-16 pt-0 md:pt-5 pb-0"
       style={{ backgroundColor: '#faf9f6' }}
     >
       <div className="relative w-full" style={{ 
@@ -230,7 +230,7 @@ export default function Hero({ isMenuOpen }) {
           />
 
           <div
-            className="absolute inset-x-0 top-[18%] flex flex-col items-center text-center px-6 z-30"
+            className={`absolute inset-x-0 flex flex-col items-center text-center px-6 z-30 ${isMobile ? 'top-[15%]' : 'top-[18%]'}`}
             style={{ pointerEvents: 'none' }}
           >
             <motion.h1
