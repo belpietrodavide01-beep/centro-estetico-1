@@ -75,7 +75,7 @@ function ServicePill({ name, img, scale }) {
         boxShadow: isMobileScale ? '0 4px 15px rgba(0,0,0,0.03)' : '0 10px 25px rgba(0,0,0,0.06)',
         position: 'relative',
         overflow: 'hidden',
-        willChange: 'transform',
+        willChange: 'transform, backdrop-filter',
         transform: `translateZ(0) scale(${scale})`,
         transformOrigin: 'bottom center'
       }}
@@ -174,7 +174,7 @@ export default function Hero({ isMenuOpen }) {
       id="home"
       ref={sectionRef}
       className="min-h-screen flex flex-col items-center justify-start px-6 lg:px-16 pt-0 md:pt-5 pb-0"
-      style={{ backgroundColor: '#faf9f6' }}
+      style={{ backgroundColor: '#faf9f6', contain: 'paint layout' }}
     >
       <div className="relative w-full" style={{ 
         height: isMobile ? '70vh' : 'calc(100vh - 5rem)', 
@@ -182,18 +182,13 @@ export default function Hero({ isMenuOpen }) {
         maxHeight: isMobile ? '650px' : '860px' 
       }}>
         
-        {/* OMBRA E FORMA DELLA HERO (Semplificata, senza maschera pesantissima) */}
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            zIndex: 0,
-            filter: 'drop-shadow(0 10px 30px rgba(0,0,0,0.06))',
-          }}
-        >
+        {/* OMBRA E FORMA DELLA HERO */}
+        <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
           <div
             className="w-full h-full bg-stone-100"
             style={{
               borderRadius: isMobile ? '32px' : '44px',
+              boxShadow: '0 10px 40px rgba(0,0,0,0.04)',
               WebkitMaskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
               maskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
             }}
@@ -231,7 +226,7 @@ export default function Hero({ isMenuOpen }) {
 
           <div
             className={`absolute inset-x-0 flex flex-col items-center text-center px-6 z-30 ${isMobile ? 'top-[15%]' : 'top-[18%]'}`}
-            style={{ pointerEvents: 'none' }}
+            style={{ pointerEvents: 'none', willChange: 'transform, opacity' }}
           >
             <motion.h1
               initial={{ opacity: 0, y: 15 }}
@@ -279,6 +274,7 @@ export default function Hero({ isMenuOpen }) {
               zIndex: 20,
               willChange: 'transform',
               transform: 'translateZ(0)',
+              contain: 'none' // Ensure children aren't clipped
             }}
           >
             {displayServices.map((item, i) => {

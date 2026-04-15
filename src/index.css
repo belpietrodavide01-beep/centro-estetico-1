@@ -66,6 +66,7 @@ html.lenis body {
   backface-visibility: hidden;
   perspective: 1000px;
   will-change: transform;
+  contain: paint;
 }
 
 /* Fluid scroll helper */
