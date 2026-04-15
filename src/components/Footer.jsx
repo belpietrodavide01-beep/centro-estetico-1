@@ -25,7 +25,7 @@ export default function Footer() {
               className="w-32 h-auto"
             >
               <img 
-                src="/logo estics definitivo.svg" 
+                src="/logo.svg" 
                 alt="Estics Logo" 
                 className="w-full h-auto object-contain" 
                 style={{ filter: 'brightness(0)' }}

@@ -171,7 +171,7 @@ export default function Hero() {
     <section
       id="home"
       ref={sectionRef}
-      className="min-h-screen flex flex-col items-center justify-start px-6 lg:px-16 pt-2 md:pt-10 pb-0"
+      className="min-h-screen flex flex-col items-center justify-start px-6 lg:px-16 pt-2 md:pt-5 pb-0"
       style={{ backgroundColor: '#faf9f6' }}
     >
       <div className="relative w-full" style={{ 
@@ -213,11 +213,10 @@ export default function Hero() {
             src="/hero-main.png"
             alt="Centro Estetico Premium"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            style={{ willChange: 'transform' }}
+            style={{ shadow: 'inset 0 0 100px rgba(0,0,0,0.5)' }}
             loading="eager"
-          />
-
-          <div
+            decoding="sync"
+          /><div
             className="absolute inset-0"
             style={{
               background: 'linear-gradient(180deg, rgba(250,249,246,0.92) 0%, rgba(250,249,246,0.4) 40%, rgba(250,249,246,0) 70%)',
@@ -312,7 +311,7 @@ export default function Hero() {
           }}
         >
           <img
-            src="/logo estics definitivo.svg"
+            src="/logo.svg"
             alt="Logo"
             style={{
               width: isMobile ? '38px' : '44px',

@@ -58,10 +58,10 @@ export default function Navbar() {
               whileTap={{ scale: 0.97 }}
               className="flex-shrink-0 h-14"
             >
-              <img
-                src="/logo estics definitivo.svg"
-                alt="Estics — Centro Estetico"
-                className="h-full w-auto object-contain"
+              <img 
+                src="/logo.svg" 
+                alt="Estics — Centro Estetico" 
+                className="h-full w-auto object-contain" 
                 style={{ filter: 'brightness(0)' }}
               />
             </motion.a>
