@@ -260,7 +260,7 @@ export default function BentoGridSection() {
                 Anni di eccellenza nel settore estetico professionale
               </p>
               <div className="flex flex-wrap gap-2.5 z-10">
-                <span className="px-4 py-1.5 bg-white/90 border border-[#a67c52]/20 rounded-full text-[11px] font-bold tracking-wider text-[#a67c52] uppercase shadow-sm">2,000+ Clienti</span>
+                <span className="px-4 py-1.5 bg-white/90 border border-[#a67c52]/20 rounded-full text-[11px] font-bold tracking-wider text-[#a67c52] uppercase shadow-sm">500+ Clienti</span>
                 <span className="px-4 py-1.5 bg-white/90 border border-[#a67c52]/20 rounded-full text-[11px] font-bold tracking-wider text-[#a67c52] uppercase shadow-sm">50+ Trattamenti</span>
               </div>
             </motion.div>
@@ -276,7 +276,7 @@ export default function BentoGridSection() {
                   {[...Array(5)].map((_, i) => <Star key={i} size={16} className="fill-[#8c6b4a] text-[#8c6b4a]" />)}
                 </div>
                 <h3 className="text-black text-4xl font-serif mb-1" style={{ fontFamily: 'Cormorant Garamond, serif' }}>99%</h3>
-                <p className="text-black/60 text-sm">Clienti globali totalmente soddisfatti</p>
+                <p className="text-black/60 text-sm">Clienti totalmente soddisfatti</p>
               </div>
 
               {/* Masking Container for Marquee */}
