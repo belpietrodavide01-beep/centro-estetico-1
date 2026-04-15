@@ -68,9 +68,9 @@ function ServicePill({ name, img, scale }) {
         gap: isMobileScale ? `${10 * scale}px` : `${12 * scale}px`,
         width: `${50 * scale}px`,
         height: isMobileScale ? `${210 * scale}px` : `${215 * scale}px`,
-        background: isMobileScale ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255,255,255,0.3)',
-        backdropFilter: isMobileScale ? 'blur(8px)' : 'none',
-        border: isMobileScale ? '1px solid rgba(255, 255, 255, 0.6)' : '0.8px solid rgba(255,255,255,0.5)',
+        background: isMobileScale ? 'rgba(255, 253, 250, 0.95)' : 'rgba(255,255,255,0.3)',
+        backdropFilter: isMobileScale ? 'none' : 'none', // Disabled for performance
+        border: isMobileScale ? '1px solid rgba(166, 124, 82, 0.15)' : '0.8px solid rgba(255,255,255,0.5)',
         borderRadius: '999px',
         boxShadow: isMobileScale ? '0 4px 15px rgba(0,0,0,0.03)' : '0 10px 25px rgba(0,0,0,0.06)',
         position: 'relative',
@@ -167,6 +167,20 @@ export default function Hero() {
     }
   }, [isInView]);
 
+  // Pause when the mobile menu is open to free up resources for the menu's blur effect
+  useEffect(() => {
+    const handleMenuToggle = (e) => {
+      const isMenuOpen = e.detail.open;
+      if (rotateTween.current) {
+        if (isMenuOpen) rotateTween.current.pause();
+        else if (isInView) rotateTween.current.play();
+      }
+    };
+
+    window.addEventListener('navbar-menu-toggle', handleMenuToggle);
+    return () => window.removeEventListener('navbar-menu-toggle', handleMenuToggle);
+  }, [isInView]);
+
   return (
     <section
       id="home"
@@ -210,6 +224,8 @@ export default function Hero() {
             backgroundImage: "url('/hero-main.png')",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
+            willChange: 'mask-image, -webkit-mask-image',
+            transform: 'translateZ(0)'
           }}
         >
           <img

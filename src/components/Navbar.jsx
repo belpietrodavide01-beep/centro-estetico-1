@@ -39,6 +39,11 @@ export default function Navbar() {
     }
   }, [])
 
+  // Dispatch event for performance synchronization (Hero pausing)
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent('navbar-menu-toggle', { detail: { open: menuOpen } }));
+  }, [menuOpen])
+
   return (
     <>
       <motion.header
