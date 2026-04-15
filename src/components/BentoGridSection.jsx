@@ -125,12 +125,12 @@ export default function BentoGridSection() {
                 style={{ willChange: 'backdrop-filter' }}
               >
                 {/* Two Column Title */}
-                <div className="flex justify-between items-baseline mb-3 gap-2">
-                  <h3 className="text-white text-xl md:text-3xl font-serif leading-tight shrink-0" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                    Risultati reali,
+                <div className="flex justify-between items-end mb-4 gap-4">
+                  <h3 className="text-white text-xl md:text-3xl font-serif leading-[1.1]" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                    Risultati<br />reali
                   </h3>
-                  <h3 className="text-white text-xl md:text-3xl font-serif leading-tight text-right w-full" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
-                    storie di bellezza
+                  <h3 className="text-white text-xl md:text-3xl font-serif leading-[1.1] text-right" style={{ fontFamily: 'Cormorant Garamond, serif' }}>
+                    Storie di<br />bellezza
                   </h3>
                 </div>
 
