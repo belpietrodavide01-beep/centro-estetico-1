@@ -90,7 +90,7 @@ export default function TestimonialSection() {
                 99%
               </h3>
               <p className="text-[12px] font-bold tracking-[0.15em] text-[#a67c52] uppercase">
-                2k+ Global trusted customers
+                Oltre 2000 clienti soddisfatti
               </p>
             </div>
 

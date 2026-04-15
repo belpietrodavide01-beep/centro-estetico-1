@@ -200,22 +200,25 @@ export default function Hero() {
 
         {/* CONTENUTO HERO */}
         <div
-          className="relative w-full h-full overflow-hidden"
+          className="relative w-full h-full overflow-hidden gpu-layer"
           style={{
             zIndex: 10,
             borderRadius: isMobile ? '32px' : '44px',
             WebkitMaskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
             maskImage: `radial-gradient(circle at 50% calc(100% + 5px), transparent ${notchW / 2 + 4}px, black ${notchW / 2 + 4.5}px)`,
-            backgroundColor: '#000',
+            backgroundColor: '#faf9f6',
+            backgroundImage: "url('/hero-main.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
           <img
             src="/hero-main.png"
             alt="Centro Estetico Premium"
             className="absolute inset-0 w-full h-full object-cover object-center"
-            style={{ shadow: 'inset 0 0 100px rgba(0,0,0,0.5)' }}
             loading="eager"
             decoding="sync"
+            fetchpriority="high"
           /><div
             className="absolute inset-0"
             style={{
